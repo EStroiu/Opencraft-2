@@ -83,11 +83,11 @@ public class FirstPersonController : NetworkBehaviour
         HighlightBlock();
 
         // Placing blocks
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.rightButton.wasPressedThisFrame)
         {
             CmdPlaceBlock(playerCam.position, playerCam.forward);
         }
-        else if (Mouse.current.rightButton.wasPressedThisFrame)
+        else if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             CmdRemoveBlock(playerCam.position, playerCam.forward);
         }

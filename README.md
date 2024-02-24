@@ -208,33 +208,12 @@ Currently supported network gaming libraires:
 1. [Entity Component System](https://docs.unity3d.com/Packages/com.unity.entities@1.0/manual/index.html)
 2. [Mirror](https://mirror-networking.com/)
 
-In order to use a specific prototype simply hide the frontends of other implementation (WIP putting ECS version in a separate frontend). For example, to use Mirror version the components of Opencraft 2.0 should look like this in Unity editor (h mark for hidden): 
-```
-.
-├── Directional Light
-├── GameBootstrap [h]
-├── SceneLoaderScene [h]
-├── Statistics [h]
-├── Terrain [h]
-├── PolkaDOTS_Frontend [h]/
-│   ├── DefaultCamera
-│   ├── Canvas
-│   └── PlayerEmulation
-└── MirrorFrontend/
-    ├── NetworkManager
-    ├── PlayerSpawnPoint
-    └── FlatMap
-```
-
-### Entity Component System
-
-
+By default set to ECS, can be switched within the Unity Editor in the Controller component - keep in mind that the build will default to the selected prototype. To access different prototypes, for example mirror, after the build use command `./game_executable -mirror`.
 
 ### Mirror
 Useful paths:
 Prefab directory: `Assets/Prefabs/Mirror_Prefabs`
 Scripts folder: `Assets/Scripts/Mirror_Scripts`
-Log outputs: `C:\Users\<username>\AppData\LocalLow\Opencraft` for Windows and `/home/<username>/.config/unity3d/Opencraft` for Linux
 
 `Assets` directory also icludes `Mirror` folder which is usually imported once download through the Package Manager, but only if you add it as your own asset throught the Unity's Asset Store. WIP make a package for it and add as a dependency. 
 
@@ -244,4 +223,4 @@ Log outputs: `C:\Users\<username>\AppData\LocalLow\Opencraft` for Windows and `/
 
 All the prefabs are configurable and can be used for implemenation of other network libraries, simply remove Mirror's components, change NetworkBahaviour to MonoBehaviour, and the commands that are not recognized afterwards can be removed.
 
-Logs are stored in separate files specifiec above, each player creates a unique file for a specific session.
+Logs are stored in separate files relative to the project location in `mirror_logs` folder, each player creates a unique file for a specific session.

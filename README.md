@@ -2,7 +2,7 @@
 Opencraft 2 is an Minecraft-like online game built in Unity. It is intended for supporting experimental research on
 online game and cloud gaming performance. 
 ## Setup
-Install *Unity 2022 LTS*, clone this repository using `git clone --recurse-submodules`, and open it in Unity. 
+Install *Unity 2022 LTS*, clone this repository using `git clone --recurse-submodules`, and open it in Unity. To clone a specific branch do `git clone -b <BRANCH_NAME> --recurse-submodules git@github.com:atlarge-research/Opencraft-2.git`  
 Unity should automatically install required packages. This includes the [ParrelSync](https://github.com/VeriorPies/ParrelSync) package,
 which is useful for testing multiplayer functionality in-editor.
 The [Rider](https://www.jetbrains.com/rider/) IDE is recommended, it has direct integration with Unity.
@@ -204,3 +204,26 @@ The Json is expected to follow this formatting (excluding comments):
 ]
 }
 ```
+## Netcodes
+Opencraft 2.0 has implementation of Minecraft-Like prototypes using different netcodes which can be useful for testing and benchmarking.
+
+Currently supported network gaming libraires:
+1. [Entity Component System](https://docs.unity3d.com/Packages/com.unity.entities@1.0/manual/index.html)
+2. [Mirror](https://mirror-networking.com/)
+
+By default set to ECS, can be switched within the Unity Editor in the Controller component - keep in mind that the build will default to the selected prototype. To access different prototypes, for example mirror, after the build use command `./game_executable -mirror`.
+
+### Mirror
+Useful paths:
+Prefab directory: `Assets/Prefabs/Mirror_Prefabs`
+Scripts folder: `Assets/Scripts/Mirror_Scripts`
+
+`Assets` directory also icludes `Mirror` folder which is usually imported once download through the Package Manager, but only if you add it as your own asset throught the Unity's Asset Store. WIP make a package for it and add as a dependency. 
+
+- `NetworkManager` does all the heavy lifting. Once you created an object add a Network Identity component to it and add to the `NetworkManager`. Use NetworkBahaviour instead of MonoBehaviour in scripts.
+- `PlayerSpawnPoint` is just a configurable spawn point.
+- `FlatMap` currently a simple flatmap with length, width, and height properties. Does not support parallel chunk load (WIP, refer to implementation in ECS).
+
+All the prefabs are configurable and can be used for implemenation of other network libraries, simply remove Mirror's components, change NetworkBahaviour to MonoBehaviour, and the commands that are not recognized afterwards can be removed.
+
+Logs are stored in separate files relative to the project location in `mirror_logs` folder, each player creates a unique file for a specific session.

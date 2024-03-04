@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571328, b: 0.3069218, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -293,7 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ECS_frontend: {fileID: 5123285644163685238}
   Mirror_frontend: {fileID: 1756036286}
-  debugComponentSelection: 0
+  debugComponentSelection: 1
 --- !u!4 &794583264
 Transform:
   m_ObjectHideFlags: 0
@@ -320,7 +320,7 @@ PrefabInstance:
     - target: {fileID: 1678366250488360657, guid: ee0e0ca2cc142794cb4f77e4acc7d00f,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4318634564997860021, guid: ee0e0ca2cc142794cb4f77e4acc7d00f,
         type: 3}
@@ -435,7 +435,7 @@ PrefabInstance:
     - target: {fileID: 8661613004469007443, guid: ee0e0ca2cc142794cb4f77e4acc7d00f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8816542144760325806, guid: ee0e0ca2cc142794cb4f77e4acc7d00f,
         type: 3}

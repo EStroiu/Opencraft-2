@@ -56,19 +56,6 @@ public class FirstPersonController : NetworkBehaviour
     }
     
 
-    // void Start()
-    // {
-    //     if (!isLocalPlayer)
-    //     {
-    //         return;
-    //     }
-
-    //     Cursor.lockState = CursorLockMode.Locked;
-
-    //     controller = GetComponent<CharacterController>();
-
-    // }
-
     void Start()
     {
         if (!isLocalPlayer)
@@ -176,18 +163,35 @@ public class FirstPersonController : NetworkBehaviour
     void CmdPlaceBlock(Vector3 cameraPosition, Vector3 cameraForward)
     {
         RaycastHit hit;
-        if (Physics.Raycast(cameraPosition, cameraForward, out hit, maxPlaceDistance))
-        {
-            Vector3 gridPosition = RoundToNearestGrid(hit.point + hit.normal * 0.5f);
+        int layerMask = ~(1 << LayerMask.NameToLayer("Player")); 
 
-            if (!IsBlockAtPosition(gridPosition) && !IsPlayerInSpace(gridPosition))
+        if (Physics.Raycast(cameraPosition, cameraForward, out hit, maxPlaceDistance, layerMask))
+        {
+            if (hit.collider.CompareTag("Block") || hit.distance <= maxPlaceDistance)
             {
+                Vector3 gridPosition = RoundToNearestGrid(hit.point + hit.normal * 0.5f);
                 GameObject newBlock = Instantiate(blockPrefab, gridPosition, Quaternion.identity);
                 NetworkServer.Spawn(newBlock);
             }
         }
     }
-    
+
+    [Command]
+    void CmdRemoveBlock(Vector3 cameraPosition, Vector3 cameraForward)
+    {
+        RaycastHit hit;
+        int layerMask = ~(1 << LayerMask.NameToLayer("Player")); 
+
+        if (Physics.Raycast(cameraPosition, cameraForward, out hit, maxPlaceDistance, layerMask))
+        {
+            if (hit.collider.CompareTag("Block") || hit.distance <= maxPlaceDistance) 
+            {
+                Destroy(hit.collider.gameObject);
+                NetworkServer.Destroy(hit.collider.gameObject);
+            }
+        }
+    }
+
     bool IsPlayerInSpace(Vector3 position)
     {
         Collider[] playerColliders = playerRoot.GetComponentsInChildren<Collider>();
@@ -232,24 +236,16 @@ public class FirstPersonController : NetworkBehaviour
         return false;
     }
 
-    [Command]
-    void CmdRemoveBlock(Vector3 cameraPosition, Vector3 cameraForward)
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(cameraPosition, cameraForward, out hit, maxRemoveDistance))
-        {
-            if (hit.collider.CompareTag("Block"))
-            {
-                Destroy(hit.collider.gameObject);
-                NetworkServer.Destroy(hit.collider.gameObject);
-            }
-        }
-    }
-
     void HighlightBlock()
     {
         RaycastHit hit;
-        if (Physics.Raycast(playerCam.position, playerCam.forward, out hit, maxPlaceDistance))
+        int layerMask = ~(1 << LayerMask.NameToLayer("Player")); // Ignore the player layer
+
+        Vector3 raycastDirection = playerCam.forward;
+        Vector3 raycastDirectionDownward = Vector3.down;
+
+        if (Physics.Raycast(playerCam.position, raycastDirection, out hit, maxPlaceDistance, layerMask) ||
+            Physics.Raycast(playerCam.position, raycastDirectionDownward, out hit, maxPlaceDistance, layerMask))
         {
             GameObject hitBlock = hit.collider.gameObject;
             if (hitBlock.CompareTag("Block"))
@@ -281,6 +277,7 @@ public class FirstPersonController : NetworkBehaviour
             }
         }
     }
+
 
     void ApplyHighlight(GameObject block)
     {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4916908092433536673}
   - component: {fileID: 4694468587231276200}
   - component: {fileID: 4964901493406872617}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerPrefab_Mirror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.8
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -137,7 +137,7 @@ MonoBehaviour:
   cameraSensitivity: 0.25
   controller: {fileID: 4916908092433536673}
   speed: 5
-  jumpHeight: 0.8
+  jumpHeight: 1
   gravity: 9.81
   isGrounded: 0
   move:
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 3543714510808034406}
   - component: {fileID: 4733244672516627839}
   - component: {fileID: 4469581796279731344}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 3327784506384276375}
   - component: {fileID: 3362158504391595280}
   - component: {fileID: 9220863229503480778}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 6036948548157608587}
   - component: {fileID: 367894116622119936}
   - component: {fileID: 1727770314068735820}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}

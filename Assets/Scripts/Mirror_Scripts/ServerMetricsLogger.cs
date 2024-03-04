@@ -52,7 +52,7 @@ public class ServerMetricsLogger : NetworkBehaviour
     {
         TimeSpan uptime = DateTime.Now - serverStartTime;
         int playerCount = NetworkServer.connections.Count;
-        int objectCount = FindObjectsOfType<NetworkIdentity>().Count() - playerCount - 1;
+        int objectCount = FindObjectsOfType<NetworkIdentity>().Count() - playerCount;
 
         // Log server metrics to file in CSV format
         string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");

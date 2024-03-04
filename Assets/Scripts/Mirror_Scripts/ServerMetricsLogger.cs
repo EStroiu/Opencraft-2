@@ -3,6 +3,7 @@ using Mirror;
 using System;
 using System.IO;
 using System.Linq;
+using kcp2k;
 
 public class ServerMetricsLogger : NetworkBehaviour
 {

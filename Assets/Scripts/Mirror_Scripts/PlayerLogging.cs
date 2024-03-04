@@ -20,10 +20,11 @@ public class PlayerLogging : NetworkBehaviour
             isLoggingInitialized = true;
         }
     }
+
     void InitializeLogging()
     {
         string connectionId = Guid.NewGuid().ToString();
-        logFileName = "player_log_" + connectionId + ".txt";
+        logFileName = "player_log_" + connectionId + ".csv";
         
         string logDirectory = Path.Combine(Application.dataPath, "mirror_logs");
 
@@ -34,6 +35,9 @@ public class PlayerLogging : NetworkBehaviour
 
         string path = Path.Combine(logDirectory, logFileName);
         writer = new StreamWriter(path, true);
+
+        // Write CSV header
+        writer.WriteLine("Timestamp,PlayerPosition_X,PlayerPosition_Y,PlayerPosition_Z,RoundTripDelay_ms");
 
         LogPlayerData();
     }
@@ -53,7 +57,9 @@ public class PlayerLogging : NetworkBehaviour
         string formattedLatency = player_rtt.ToString("F2");
         string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-        writer.WriteLine($"[{timestamp}] Player Position: {playerPosition} Round-trip delay: {formattedLatency} ms");
+        // Log player data to file in CSV format
+        string csvLine = $"{timestamp},{playerPosition.x},{playerPosition.y},{playerPosition.z},{formattedLatency}";
+        writer.WriteLine(csvLine);
 
         writer.Flush();
     }

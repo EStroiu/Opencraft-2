@@ -56,10 +56,31 @@ public class FirstPersonController : NetworkBehaviour
     }
     
 
+    // void Start()
+    // {
+    //     if (!isLocalPlayer)
+    //     {
+    //         return;
+    //     }
+
+    //     Cursor.lockState = CursorLockMode.Locked;
+
+    //     controller = GetComponent<CharacterController>();
+
+    // }
+
     void Start()
     {
         if (!isLocalPlayer)
         {
+            // Ensure that the camera sees other players' bodies
+            foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
+            {
+                if (renderer.CompareTag("Player"))
+                {
+                    renderer.enabled = true;
+                }
+            }
             return;
         }
 
@@ -67,7 +88,16 @@ public class FirstPersonController : NetworkBehaviour
 
         controller = GetComponent<CharacterController>();
 
+        // Disable rendering of the local player's body
+        foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
+        {
+            if (renderer.CompareTag("Player"))
+            {
+                renderer.enabled = false;
+            }
+        }
     }
+
 
     void Update()
     {

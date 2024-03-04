@@ -273,9 +273,9 @@ GameObject:
   - component: {fileID: 3284410825824377172}
   - component: {fileID: 5542047274796219551}
   - component: {fileID: 3398563055039171743}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerBody
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -439,7 +439,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

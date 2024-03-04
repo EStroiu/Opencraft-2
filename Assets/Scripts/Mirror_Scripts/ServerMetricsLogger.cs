@@ -2,9 +2,7 @@ using UnityEngine;
 using Mirror;
 using System;
 using System.IO;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 
 public class ServerMetricsLogger : NetworkBehaviour
 {
@@ -30,7 +28,7 @@ public class ServerMetricsLogger : NetworkBehaviour
 
     void InitializeLogging()
     {
-        logFileName = "server_log.txt";
+        logFileName = "server_log.csv";
         string logDirectory = Path.Combine(Application.dataPath, "mirror_logs");
         if (!Directory.Exists(logDirectory))
         {
@@ -38,6 +36,9 @@ public class ServerMetricsLogger : NetworkBehaviour
         }
         string path = Path.Combine(logDirectory, logFileName);
         writer = new StreamWriter(path, true);
+
+        // Write CSV header
+        writer.WriteLine("Timestamp,Uptime(seconds),PlayerCount,ObjectCount");
 
         LogServerMetrics();
     }
@@ -49,23 +50,17 @@ public class ServerMetricsLogger : NetworkBehaviour
 
     void LogMetrics()
     {
-        // Calculate server uptime
         TimeSpan uptime = DateTime.Now - serverStartTime;
-
-        // Get the count of connected players
         int playerCount = NetworkServer.connections.Count;
+        int objectCount = FindObjectsOfType<NetworkIdentity>().Count() - playerCount - 1;
 
-        // Get the count of objects on the server (excluding players)
-        int objectCount = FindObjectsOfType<NetworkIdentity>().Count() - playerCount;
-
-        // Log server metrics to file
+        // Log server metrics to file in CSV format
         string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        writer.WriteLine($"[{timestamp}] Server Uptime: {uptime}, Connected Players: {playerCount}, Objects on Server: {objectCount}");
+        string csvLine = $"{timestamp},{uptime.TotalSeconds},{playerCount},{objectCount}";
+        writer.WriteLine(csvLine);
 
         writer.Flush();
     }
-    
-
 
     void OnDestroy()
     {

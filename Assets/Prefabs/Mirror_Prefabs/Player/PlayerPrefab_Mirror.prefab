@@ -36,7 +36,6 @@ Transform:
   m_Children:
   - {fileID: 6350538426119683630}
   - {fileID: 1185994408637279855}
-  - {fileID: 318258702994255457}
   - {fileID: 7077818778177147116}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -138,9 +137,8 @@ MonoBehaviour:
   cameraSensitivity: 0.25
   controller: {fileID: 4916908092433536673}
   speed: 5
-  jumpHeight: 0.5
+  jumpHeight: 0.8
   gravity: 9.81
-  feet: {fileID: 318258702994255457}
   isGrounded: 0
   move:
     m_Name: Move
@@ -505,37 +503,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1 &6335978190138111095
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 318258702994255457}
-  m_Layer: 0
-  m_Name: Feet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &318258702994255457
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6335978190138111095}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.95, z: 0}
-  m_LocalScale: {x: 0.75, y: 1.8, z: 0.75}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8758503093042895729}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8185841316343599735
 GameObject:
   m_ObjectHideFlags: 0

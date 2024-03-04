@@ -16,7 +16,6 @@ public class FirstPersonController : NetworkBehaviour
     public float speed;
     public float jumpHeight;
     public float gravity;
-    public Transform feet;
     public bool isGrounded;
     private Vector3 velocity;
 
@@ -81,8 +80,25 @@ public class FirstPersonController : NetworkBehaviour
         }
         
         HighlightBlock();
+        HandleBlocks();
+        HandleCamera();
+        HandleMovement();
+    }
 
-        // Placing blocks
+    void HandleCamera()
+    {
+        Vector2 mouseInput = new Vector2(mouseX.ReadValue<float>() * cameraSensitivity,
+            mouseY.ReadValue<float>() * cameraSensitivity);
+        rotX -= mouseInput.y;
+        rotX = Mathf.Clamp(rotX, -90, 90);
+        rotY += mouseInput.x;
+
+        playerRoot.rotation = Quaternion.Euler(0f, rotY, 0f);
+        playerCam.localRotation = Quaternion.Euler(rotX, 0f, 0f); 
+    }
+
+    void HandleBlocks()
+    {
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
             CmdPlaceBlock(playerCam.position, playerCam.forward);
@@ -93,36 +109,28 @@ public class FirstPersonController : NetworkBehaviour
         }
 
         controller.Move(velocity * Time.deltaTime);
-
-        // Camera movement
-        Vector2 mouseInput = new Vector2(mouseX.ReadValue<float>() * cameraSensitivity,
-            mouseY.ReadValue<float>() * cameraSensitivity);
-        rotX -= mouseInput.y;
-        rotX = Mathf.Clamp(rotX, -90, 90);
-        rotY += mouseInput.x;
-
-        playerRoot.rotation = Quaternion.Euler(0f, rotY, 0f);
-        playerCam.localRotation = Quaternion.Euler(rotX, 0f, 0f);
-
-        // Player movement
+    }
+    
+    void HandleMovement()
+    {
         Vector2 moveInput = move.ReadValue<Vector2>();
         Vector3 moveVelocity = playerRoot.forward * moveInput.y + playerRoot.right * moveInput.x;
+        moveVelocity *= speed;
 
-        controller.Move(moveVelocity * (speed * Time.deltaTime));
-
-        isGrounded = Physics.Raycast(feet.position, feet.TransformDirection(Vector3.down), 0.15f);
-        
-        // Gravity
-        if (!isGrounded)
+        if (controller.isGrounded)
         {
-            velocity.y -= gravity * Time.deltaTime;
+            velocity.y = -0.1f; // Reset velocity when grounded
+            if (jump.triggered)
+            {
+                velocity.y = Mathf.Sqrt(2f * jumpHeight * gravity); // Jump
+            }
         }
         else
         {
-            velocity.y = -0.1f;
+            velocity.y -= gravity * Time.deltaTime; // Apply gravity when jumping or falling
         }
 
-        controller.Move(velocity * Time.deltaTime);
+        controller.Move((moveVelocity + velocity) * Time.deltaTime);
     }
 
     void Jump()

@@ -44,7 +44,7 @@ public class PlayerLogging : NetworkBehaviour
 
     void LogPlayerData()
     {
-        InvokeRepeating(nameof(LogPlayerState), 0f, 1f);
+        InvokeRepeating(nameof(LogPlayerState), 0f, 0.5f);
     }
 
     void LogPlayerState()

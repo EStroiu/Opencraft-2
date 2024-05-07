@@ -1,13 +1,16 @@
 using UnityEngine;
 using Mirror;
-using kcp2k;
+using PolkaDOTS.Emulation;
 
 public class NetworkHelper : MonoBehaviour
 {
     public NetworkManager networkManager;
+    public GameObject playerPrefab;
     public bool startServerInEditor = false;
+    public bool startClientInEditor = false;
     public string serverIP = "localhost";
     public int serverPort = 7777;  // Add server port variable
+
 
     void Start()
     {
@@ -22,10 +25,11 @@ public class NetworkHelper : MonoBehaviour
         {
             networkManager.StartServer();
         }
-        else
-        {
+
+        if(startClientInEditor){
             networkManager.StartClient();
         }
+
         #else
         string[] args = System.Environment.GetCommandLineArgs();
 
@@ -50,7 +54,7 @@ public class NetworkHelper : MonoBehaviour
                 }
                 break;
             }
-            else if (arg == "-server_port")  // Handle server port argument
+            else if(arg == "-server_port")  // Handle server port argument
             {
                 int index = System.Array.IndexOf(args, arg);
                 if (index < args.Length - 1)
@@ -72,6 +76,18 @@ public class NetworkHelper : MonoBehaviour
         
         networkManager.StartClient();
         #endif
+
     }
+
+    // private void StartPlayerReplayEmulation(string inputTraceFile){
+    //     // Spawn player and remember the instance
+        
+    //     // Get the player GameObject and load the input recording into it
+
+        // InputRecorder inputRecorder = player.GetComponent<InputRecorder>();
+        // inputRecorder.LoadCaptureFromFile(inputTraceFile);
+        // inputRecorder.StartReplay();
+    // }
+
 }
 

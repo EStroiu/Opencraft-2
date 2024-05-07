@@ -14,9 +14,11 @@ GameObject:
   - component: {fileID: 4916908092433536673}
   - component: {fileID: 4694468587231276200}
   - component: {fileID: 4964901493406872617}
+  - component: {fileID: -5370162023248555532}
+  - component: {fileID: 5395500683660905808}
   m_Layer: 6
   m_Name: PlayerPrefab_Mirror
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -261,6 +263,43 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+--- !u!114 &-5370162023248555532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669053311976344264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947bbf6d07a849f88ae34e79d6fb2f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartRecordingWhenEnabled: 0
+  m_RecordFrames: 1
+  m_ReplayOnNewDevices: 0
+  m_SimulateOriginalTimingOnReplay: 0
+  m_RecordStateEventsOnly: 0
+  m_CaptureMemoryDefaultSize: 2097152
+  m_CaptureMemoryMaxSize: 52428800
+  m_DevicePath: 
+  m_RecordButtonPath: 
+  m_PlayButtonPath: 
+  m_ChangeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5395500683660905808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669053311976344264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c9fc696e9be9441af01a42c587675b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4128461102450180931
 GameObject:
   m_ObjectHideFlags: 0

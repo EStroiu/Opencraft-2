@@ -211,8 +211,6 @@ Currently supported network gaming libraires:
 1. [Entity Component System](https://docs.unity3d.com/Packages/com.unity.entities@1.0/manual/index.html)
 2. [Mirror](https://mirror-networking.com/)
 
-By default set to ECS, can be switched within the Unity Editor in the Controller component - keep in mind that the build will default to the selected prototype. To access different prototypes, for example mirror, after the build use command `./game_executable -mirror`.
-
 ### Mirror
 Useful paths:
 Prefab directory: `Assets/Prefabs/Mirror_Prefabs`
